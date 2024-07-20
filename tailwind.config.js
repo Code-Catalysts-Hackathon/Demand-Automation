@@ -21,6 +21,9 @@ module.exports = {
       '2xl': '1440px'
     },
     extend: {
+      animation: {
+        'spin-fast': 'spin 500ms linear infinite',
+      },
       colors: {
         'primary-light': '#649c00', // glow Medusa green
         primary: '#006A4D', // Victoria green (primary)

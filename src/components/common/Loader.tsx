@@ -2,7 +2,7 @@ import React from 'react';
 
 const Loader = () => {
   return (
-    <div className="fixed top-0 left-0 right-0 bottom-0 bg-[#3C5564] bg-opacity-60 z-[100] flex justify-center items-center">
+    <div className="fixed top-0 left-0 right-0 bottom-0 bg-primary-dark bg-opacity-40 z-[100] flex justify-center items-center">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="64"
@@ -10,7 +10,7 @@ const Loader = () => {
         viewBox="0 0 250 250"
         fill="none"
         color="#FFFFFF"
-        style={{ animation: 'spin 600ms linear infinite' }}>
+        className='animate-spin-fast duration-75'>
         <defs>
           <linearGradient id="spinner-secondHalf">
             <stop offset="0%" stopOpacity="0" stopColor="currentColor" />

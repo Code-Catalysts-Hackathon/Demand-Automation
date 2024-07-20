@@ -1,7 +1,11 @@
-import React, { FormEvent, useState } from 'react';
+import React, { FormEvent, useContext, useState } from 'react';
 import { allowOnlyNumsNo0Exp } from '../../../config/regexp';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import axiosApiClient from '../../../config/axiosConfig';
+import AppContext from '../../../contexts/appContext';
+import { decodeTokenPayload } from '../../../utils/decryption';
+import { IUserState } from '../../../contexts/appContext/model';
+import { useNavigate } from 'react-router-dom';
 
 interface IFieldUserNameState {
   error: string;
@@ -13,6 +17,8 @@ interface IFieldPasswordState extends IFieldUserNameState {
 }
 
 export default function LoginPageForm() {
+  const appContext = useContext(AppContext);
+  const navigate = useNavigate();
   const [authStatus, setAuthStatus] = useState('');
   const [userName, setUserName] = useState<IFieldUserNameState>({
     error: '',
@@ -80,16 +86,22 @@ export default function LoginPageForm() {
     }
 
     if (validate) {
+      appContext.setLoader(true);
       const req = {
         userName: userName.value,
         password: password.value
       };
       try {
         const response = await axiosApiClient.post(axiosApiClient.URLS.api.POST_AUTH_VALIDATE, req);
-        console.log(response);
+        console.log(response.data);
+        const decoded = decodeTokenPayload(response.data.token);
+        appContext.setUser(decoded.payload as IUserState);
+        appContext.setLoader(false);
+        navigate("/dashboard");
       } catch (e) {
         console.log(e);
         setAuthStatus('Credentials does not match');
+        appContext.setLoader(false);
       }
     }
   };

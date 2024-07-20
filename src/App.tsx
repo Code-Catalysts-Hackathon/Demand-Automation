@@ -1,11 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { RouterProvider } from 'react-router-dom';
 import { router } from './routes';
 import AppContext from './contexts/appContext';
+import { IUserState } from './contexts/appContext/model';
+import Loader from './components/common/Loader';
 
 function App() {
+  const [loader, setLoader] = useState<boolean>(false);
+  const [user, setUser] = useState<IUserState>({
+    firstName: '',
+    lastName: '',
+    role: ''
+  });
+
   return (
-    <AppContext.Provider value={{}}>
+    <AppContext.Provider
+      value={{
+        user,
+        setUser,
+        setLoader
+      }}>
+      {loader ? <Loader /> : <></>}
       <RouterProvider router={router} />
     </AppContext.Provider>
   );
