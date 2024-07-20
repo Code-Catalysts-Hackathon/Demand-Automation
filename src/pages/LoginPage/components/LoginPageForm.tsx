@@ -92,9 +92,10 @@ export default function LoginPageForm() {
         password: password.value
       };
       try {
-        const response = await axiosApiClient.post(axiosApiClient.URLS.api.POST_AUTH_VALIDATE, req);
+        const response = await axiosApiClient.post(axiosApiClient.URLS.api.POST_AUTH_VALIDATE_URL, req);
         console.log(response.data);
         const decoded = decodeTokenPayload(response.data.token);
+        localStorage.setItem("token",response.data.token)
         appContext.setUser(decoded.payload as IUserState);
         appContext.setLoader(false);
         navigate("/dashboard");

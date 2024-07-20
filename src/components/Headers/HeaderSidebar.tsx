@@ -73,7 +73,7 @@ export default function HeaderSidebar() {
               <Link
                 to={navItem.href}
                 key={navItem.href}
-                className="hover:ml-4 w-full text-white dark:hover:text-blue-500 bg-primary hover:bg-primary-light p-2 pl-8 rounded-full transform ease-in-out duration-300 flex flex-row items-center space-x-3">
+                className={`hover:ml-4 w-full text-white dark:hover:text-blue-500 hover:bg-primary-light p-2 pl-8 rounded-full transform ease-in-out duration-300 flex flex-row items-center space-x-3 ${isActive?'bg-primary-light':'bg-primary'}`}>
                  {isActive?<navItem.activeIcon />:<navItem.icon />}
                 <div className="">{navItem.name}</div>
               </Link>
@@ -89,7 +89,7 @@ export default function HeaderSidebar() {
                 title={navItem.name}
                 to={navItem.href}
                 key={navItem.href}
-                className="hover:ml-4 justify-end pr-5 text-white dark:hover:text-blue-500 w-full  bg-primary hover:bg-primary-light cursor-pointer  p-3 rounded-full transform ease-in-out duration-300 flex">
+                className={`hover:ml-4 justify-end pr-5 text-white dark:hover:text-blue-500 w-full  bg-primary hover:bg-primary-light cursor-pointer  p-3 rounded-full transform ease-in-out duration-300 flex ${isActive?'bg-primary-light':'bg-primary'}`}>
                 {isActive?<navItem.activeIcon />:<navItem.icon />}
               </Link>
             );
