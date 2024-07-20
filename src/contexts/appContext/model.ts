@@ -6,6 +6,8 @@ export interface IUserState{
 
 export interface IAppContext{
     user:IUserState;
-    setUser:(value:IUserState)=>void;
-    setLoader:(value:boolean)=>void;
+    showNav:boolean;
+    setUser:React.Dispatch<React.SetStateAction<IUserState>>
+    setLoader:React.Dispatch<React.SetStateAction<boolean>>
+    setShowNav:React.Dispatch<React.SetStateAction<boolean>>
 }

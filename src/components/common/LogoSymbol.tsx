@@ -1,8 +1,8 @@
 import React from 'react';
 
-export default function LogoSymbol({className=""}) {
+export default function LogoSymbol({className="",width=60,height=60}) {
   return (
-    <svg className={className} version="1.1" xmlns="http://www.w3.org/2000/svg" width="60" height="60">
+    <svg className={className} version="1.1" xmlns="http://www.w3.org/2000/svg" width={width} height={height}>
       <path
         d="M0 0 C19.8 0 39.6 0 60 0 C60 19.8 60 39.6 60 60 C40.2 60 20.4 60 0 60 C0 40.2 0 20.4 0 0 Z "
         fill="#FCFCFC"

@@ -7,6 +7,7 @@ import Loader from './components/common/Loader';
 
 function App() {
   const [loader, setLoader] = useState<boolean>(false);
+  const [showNav, setShowNav] = useState<boolean>(false);
   const [user, setUser] = useState<IUserState>({
     firstName: '',
     lastName: '',
@@ -17,8 +18,10 @@ function App() {
     <AppContext.Provider
       value={{
         user,
+        showNav,
         setUser,
-        setLoader
+        setLoader,
+        setShowNav
       }}>
       {loader ? <Loader /> : <></>}
       <RouterProvider router={router} />

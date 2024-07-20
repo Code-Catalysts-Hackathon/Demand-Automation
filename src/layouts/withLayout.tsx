@@ -1,6 +1,7 @@
 import React from 'react';
 import Footer from '../components/Footer';
 import HeaderDefault from '../components/Headers/HeaderDefault';
+import AdminLayout from './AdminLayout';
 
 const defaultLayout = (Component: any) => {
   return () => (
@@ -14,10 +15,9 @@ const defaultLayout = (Component: any) => {
 
 const authLayout = (Component: any) => {
   return () => (
-    <>
+    <AdminLayout>
       <Component />
-      <Footer />
-    </>
+    </AdminLayout>
   );
 };
 

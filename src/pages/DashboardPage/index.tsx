@@ -1,7 +1,10 @@
 import React from 'react'
+import withLayout from '../../layouts/withLayout';
 
-export default function DashboardPage() {
+function DashboardPage() {
   return (
     <div>DashboardPage</div>
   )
 }
+
+export default withLayout(DashboardPage,'auth');
