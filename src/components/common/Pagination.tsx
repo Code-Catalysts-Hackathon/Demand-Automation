@@ -9,12 +9,12 @@ export default function Pagination({ totalEntries, perPage, currentPage, onChang
     (pageNumber: number) => {
       onChange(pageNumber);
     },
-    [onChange, perPage]
+    [onChange]
   );
 
   const pages = useMemo(() => {
     return getPaginationList(currentPage, totalPages, perPage);
-  }, [totalPages, currentPage]);
+  }, [totalPages, currentPage, perPage]);
 
   return (
     <div className="flex items-center justify-between border-t border-gray-200 bg-white py-3">
@@ -54,11 +54,12 @@ export default function Pagination({ totalEntries, perPage, currentPage, onChang
             {pages.map((pageItem: number) => {
               return (
                 <Link
+                  key={'Paginate_' + pageItem}
                   to="#"
                   onClick={() => onChangePage(pageItem)}
                   aria-current="page"
                   className={`ring-1 ring-inset ring-gray-300 relative inline-flex items-center px-4 py-2 text-sm font-semibold focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 ${pageItem === currentPage ? 'bg-primary-dark text-white focus-visible:outline-primary-dark' : 'bg-white text-black'}`}>
-                  {pageItem + 1} 
+                  {pageItem + 1}
                 </Link>
               );
             })}

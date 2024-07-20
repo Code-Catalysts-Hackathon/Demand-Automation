@@ -38,7 +38,7 @@ export default function HeaderSidebar() {
         </div>
       </div>
       <aside
-        className={`w-60 fixed transition transform ease-in-out duration-1000 z-50 flex h-screen bg-primary-dark ${showNav ? 'translate-x-none' : '-translate-x-48'}`}>
+        className={`w-60 fixed transition transform ease-in-out duration-1000 z-40 flex h-screen bg-primary-dark ${showNav ? 'translate-x-none' : '-translate-x-48'}`}>
         <div
           className={`max-toolbar translate-x-24 scale-x-0 w-full -right-6 transition transform ease-in duration-300 flex items-center justify-between border-4 border-white dark:border-[#0F172A] bg-[#1E293B]  absolute top-2 rounded-full h-12 ${showNav ? 'translate-x-24 scale-x-0' : 'translate-x-0'}`}>
           <div className="flex items-center space-x-3 group bg-gradient-to-r dark:from-cyan-500 dark:to-blue-500 from-indigo-500 via-purple-500 to-purple-500  pl-10 pr-2 py-1 rounded-full text-white  ">

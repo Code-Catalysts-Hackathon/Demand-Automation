@@ -1,0 +1,20 @@
+.customreactselect {
+  div[class*='react-select__control'] {
+    @apply ring-1;
+    @apply ring-inset;
+    @apply ring-primary-light;
+    @apply border-none;
+    &[class*='react-select__control--is-focused'] {
+      &:focus,&:hover {
+        @apply ring-2;
+        @apply ring-inset;
+        @apply ring-primary-light;
+      }
+    }
+    input[class='react-select__input'] {
+      &:focus {
+        @apply ring-0;
+      }
+    }
+  }
+}
