@@ -57,8 +57,8 @@ export default function Pagination({ totalEntries, perPage, currentPage, onChang
                   to="#"
                   onClick={() => onChangePage(pageItem)}
                   aria-current="page"
-                  className={`ring-1 ring-inset ring-gray-300 relative inline-flex items-center px-4 py-2 text-sm font-semibold text-white focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 ${pageItem === currentPage ? 'bg-primary-dark text-white focus-visible:outline-primary-dark' : 'bg-white text-primary-dark'}`}>
-                  {pageItem + 1}
+                  className={`ring-1 ring-inset ring-gray-300 relative inline-flex items-center px-4 py-2 text-sm font-semibold focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 ${pageItem === currentPage ? 'bg-primary-dark text-white focus-visible:outline-primary-dark' : 'bg-white text-black'}`}>
+                  {pageItem + 1} 
                 </Link>
               );
             })}

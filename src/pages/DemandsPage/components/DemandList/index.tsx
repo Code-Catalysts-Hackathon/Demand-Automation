@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
 import axiosApiClient from '../../../../config/axiosConfig';
 import { getAuthToken } from '../../../../utils';
 import { IDemandListResponse } from '../../models';
@@ -28,7 +28,7 @@ export default function DemandList() {
     totalEntries: 0
   });
 
-  const getDemands = async () => {
+  const getDemands = useCallback(async () => {
     try {
       setLoader(true);
       const response = await axiosApiClient.post(
@@ -45,11 +45,11 @@ export default function DemandList() {
       console.log(e);
     }
     setLoader(false);
-  };
+  },[operation,setDemands]);
 
   useEffect(() => {
     getDemands();
-  }, [operation]);
+  }, [getDemands]);
 
   const onChangePage = (pageNo: number) => {
     setOperation((prev) => {
