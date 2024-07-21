@@ -2,6 +2,12 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Backend
+
+copy backend folder to any out this folder location
+
+install dependcies `npm i` of it and run it using `npm start`
+
 ## Available Scripts
 
 In the project directory, you can run:
