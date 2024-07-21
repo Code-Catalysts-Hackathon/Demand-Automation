@@ -1,5 +1,7 @@
+import { AUTH_TOKEN } from "../config/constants";
+
 export const getLocalToken = () => {
-  return localStorage.getItem('token');
+  return localStorage.getItem(AUTH_TOKEN);
 };
 
 export const getAuthToken = () => {
@@ -36,7 +38,6 @@ export const getPaginationList = (currentPage:number, totalPages:number, perSlid
         let tmp = 0;
         let i = 0;
         if (currentPage > parseInt(String(perSlide / 2)) && !(((currentPage + 1) >= (totalPages - 1)) || ((currentPage + 1) >= (totalPages)))) {
-            console.log("if " + currentPage + " " + parseInt(String(perSlide / 2)) + " " + perSlide)
             i = (currentPage - parseInt(String(perSlide / 2)));
             if (totalPages - i < perSlide) {
                 i = totalPages - perSlide;
@@ -50,7 +51,6 @@ export const getPaginationList = (currentPage:number, totalPages:number, perSlid
             }
 
         } else {
-            console.log("else " + currentPage + " " + parseInt(String(perSlide / 2)) + " " + perSlide)
             i = 0;
             if ((currentPage + 1) === (totalPages - 1)) {
                 i = (currentPage - (parseInt(String(perSlide / 2))));

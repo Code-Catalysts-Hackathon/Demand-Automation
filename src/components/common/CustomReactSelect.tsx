@@ -1,9 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import AsyncSelect from 'react-select/async';
-import axiosApiClient from '../../config/axiosConfig';
 import styles from './CustomReactSelect.module.scss';
 import debounce from 'debounce-promise';
-import { getLocalToken } from '../../utils';
 
 interface IOption {
   label: string;
@@ -11,45 +9,32 @@ interface IOption {
 }
 
 interface ICustomReactSelectProps {
-  loadOptions?: (value: string) => Promise<IOption[]>;
-  onChange?: (value: any) => void;
+  loadOptions: (value: string) => Promise<IOption[]>;
+  onChange: (value: any) => void;
   value?: IOption;
 }
 
-const loadOptions1 = async (value: string) => {
-  try {
-    const response = await axiosApiClient.get(
-      axiosApiClient.URLS.api.GET_BUSINESS_UNITS_URL,
-      {
-        search: value
-      },
-      {
-        Authorization: getLocalToken()
-      }
-    );
-    const result = response.data.list.map((item: any) => {
-      return {
-        label: item.name,
-        value: item.id
-      };
-    });
-    return result;
-  } catch (e) {
-    console.log(e);
-    return [];
-  }
-};
 export default function CustomReactSelect({
-  loadOptions = loadOptions1,
+  loadOptions,
   onChange,
   value
 }: ICustomReactSelectProps) {
-  const debouncedEvent = debounce(loadOptions, 800);
+
+ const [options,setOptions]=useState<IOption[]>([])
+
+  const debouncedEvent = debounce(loadOptions, 500);
+
+  const onMenuOpen = async ()=>{
+    const response = await loadOptions(String(value?.value ||""));
+    setOptions(response);
+  }
 
   return (
     <div className={styles.customreactselect}>
       <AsyncSelect
+        defaultOptions={options}
         classNamePrefix={'react-select'}
+        onMenuOpen={()=>onMenuOpen()}
         loadOptions={debouncedEvent}
         onChange={onChange}
         value={value}

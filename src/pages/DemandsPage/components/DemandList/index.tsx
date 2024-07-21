@@ -1,7 +1,13 @@
 import React, { useCallback, useContext, useEffect, useState } from 'react';
 import axiosApiClient from '../../../../config/axiosConfig';
 import { getAuthToken } from '../../../../utils';
-import { IDemandListResponse } from '../../models';
+import {
+  demandToDemandFormState,
+  getInitDemandFormState,
+  IDemand,
+  IDemandFormState,
+  IDemandListResponse
+} from '../../models';
 import { Link } from 'react-router-dom';
 import { FaEye, FaPencilAlt, FaSearch } from 'react-icons/fa';
 import { RiDeleteBin3Fill } from 'react-icons/ri';
@@ -9,6 +15,7 @@ import Pagination from '../../../../components/common/Pagination';
 import AppContext from '../../../../contexts/appContext';
 import debounce from 'debounce-promise';
 import DemandPopupForm from '../DemandPopupForm';
+import DemandNotifyPopup from '../DemandNotifyPopup';
 
 interface IOperation {
   search: string;
@@ -16,8 +23,15 @@ interface IOperation {
   currentPage: number;
 }
 
+interface IDemandNotificationPopup {
+  open: boolean;
+  title: string;
+  description: string;
+}
+
 export default function DemandList() {
   const { setLoader } = useContext(AppContext);
+  const [demandForm, setDemandForm] = useState<IDemandFormState>(getInitDemandFormState());
   const [operation, setOperation] = useState<IOperation>({
     search: '',
     entriesPerPage: 5,
@@ -25,6 +39,11 @@ export default function DemandList() {
   });
 
   const [demandPopUpOpen, setDemandPopUpOpen] = useState<boolean>(false);
+  const [demandNotificationPopup, setDemandNotificationPopup] = useState<IDemandNotificationPopup>({
+    open: false,
+    title: '',
+    description: ''
+  });
 
   const [demands, setDemands] = useState<IDemandListResponse>({
     list: [],
@@ -64,8 +83,23 @@ export default function DemandList() {
   const onToggleDemandForm = (status: boolean, completed: boolean = false) => {
     setDemandPopUpOpen(status);
     if (completed) {
+      setDemandNotificationPopup({
+        open: true,
+        title: 'Successfully submitted',
+        description: ''
+      });
       getDemands();
     }
+  };
+
+  const onAddForm = () => {
+    setDemandForm(getInitDemandFormState());
+    onToggleDemandForm(true);
+  };
+
+  const onEdit = (entry: IDemand) => {
+    setDemandForm(demandToDemandFormState(entry));
+    onToggleDemandForm(true);
   };
 
   const onSearch = (search: string) => {
@@ -75,7 +109,7 @@ export default function DemandList() {
       currentPage: 0
     }));
   };
-  const onSearchDebounce = debounce(onSearch, 800);
+  const onSearchDebounce = debounce(onSearch, 500);
   return (
     <>
       <div className="px-4 sm:px-2">
@@ -86,7 +120,7 @@ export default function DemandList() {
           </div>
           <div className="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
             <button
-              onClick={() => onToggleDemandForm(true)}
+              onClick={() => onAddForm()}
               type="button"
               className="block rounded-md bg-primary-dark px-3 py-2 text-center text-sm font-ltc-m text-white shadow-sm hover:bg-primary-light focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-light">
               Add Demand
@@ -141,7 +175,7 @@ export default function DemandList() {
                   Secondary Skill
                 </th>
                 <th scope="col" className="px-3 py-3.5 text-left text-sm font-ltc-m text-black">
-                  Teritiary Skill
+                  Tertiary Skill
                 </th>
                 <th scope="col" className="px-3 py-3.5 text-left text-sm font-ltc-m text-black">
                   Grade
@@ -164,25 +198,25 @@ export default function DemandList() {
               {demands.list.map((item) => (
                 <tr key={item.id}>
                   <td className="w-full max-w-0 py-4 pl-4 pr-3 text-sm text-black font-ltc-m sm:w-auto sm:max-w-none sm:pl-0">
-                    {item.businessUnitName}
+                    {item.businessUnit.name}
                   </td>
                   <td className="px-3 py-4 text-sm text-black font-ltc-r lg:table-cell">
-                    {item.platformName}
+                    {item.platform.name}
                   </td>
                   <td className="px-3 py-4 text-sm text-black font-ltc-r lg:table-cell">
-                    {item.labName}
+                    {item.lab.name}
                   </td>
                   <td className="px-3 py-4 text-sm text-black font-ltc-r lg:table-cell">
-                    {item.featureTeamName}
+                    {item.featureTeam.name}
                   </td>
                   <td className="px-3 py-4 text-sm text-black font-ltc-r lg:table-cell">
-                    {item.primarySkill}
+                    {item.primarySkill.name}
                   </td>
                   <td className="px-3 py-4 text-sm text-black font-ltc-r lg:table-cell">
-                    {item.secondarySkill}
+                    {item.secondarySkill.name}
                   </td>
                   <td className="px-3 py-4 text-sm text-black font-ltc-r lg:table-cell">
-                    {item.tertiarySkill}
+                    {item.tertiarySkill.name}
                   </td>
                   <td className="px-3 py-4 text-sm text-black font-ltc-r lg:table-cell">
                     {item.grade}
@@ -199,7 +233,7 @@ export default function DemandList() {
 
                   <td className="py-4 pl-3 pr-4 flex gap-[5px] items-center text-sm font-medium sm:pr-0">
                     <Link to="#" title="Edit" className="text-primary-dark hover:text-primary">
-                      <FaPencilAlt />
+                      <FaPencilAlt onClick={() => onEdit(item)} />
                     </Link>
                     <Link to="#" title="View" className="text-primary-dark hover:text-primary">
                       <FaEye />
@@ -220,7 +254,16 @@ export default function DemandList() {
           />
         </div>
       </div>
-      <DemandPopupForm open={demandPopUpOpen} setOpen={onToggleDemandForm} />
+      <DemandPopupForm open={demandPopUpOpen} demandForm={demandForm} setOpen={onToggleDemandForm} />
+      <DemandNotifyPopup
+        {...demandNotificationPopup}
+        setOpen={(value: boolean) => {
+          setDemandNotificationPopup((prev: IDemandNotificationPopup) => ({
+            ...prev,
+            open: value
+          }));
+        }}
+      />
     </>
   );
 }

@@ -10,7 +10,7 @@ export const navlist = [
     icon: AiOutlineDashboard
   },
   {
-    name: 'Demand',
+    name: 'Demands',
     href: '/demands',
     activeIcon: FaLightbulb ,
     icon: FaRegLightbulb  

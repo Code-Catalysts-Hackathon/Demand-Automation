@@ -1,12 +1,40 @@
-import React, { ReactNode, useContext } from 'react';
+import React, { ReactNode, useCallback, useContext, useEffect, useState } from 'react';
 import AppContext from '../contexts/appContext';
 import HeaderSidebar from '../components/Headers/HeaderSidebar';
+import { getLocalToken } from '../utils';
+import { decodeTokenPayload } from '../utils/decryption';
+import { useNavigate } from 'react-router-dom';
+import Loader from '../components/common/Loader';
 
 const AdminLayout: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const { showNav } = useContext(AppContext);
+  const navigate = useNavigate();
+  const { showNav, user, setUser } = useContext(AppContext);
+  const [load, setLoad] = useState(false);
+  const validateToken = useCallback(() => {
+    const token = getLocalToken() || '';
+    if (token) {
+      if (!user.id) {
+        const decoded = decodeTokenPayload(token);
+        if (decoded.expired || !decoded.payload) {
+          navigate('/');
+          return null;
+        } else {
+          setUser(decoded.payload);
+        }
+      }
+      setLoad(true);
+    } else {
+      navigate('/');
+    }
+  }, [user]);
+
+  useEffect(() => {
+    validateToken();
+  }, [validateToken]);
 
   return (
     <>
+      {!load ? <Loader /> : <></>}
       <HeaderSidebar />
       <div
         className={`content ml-12 transform ease-in-out duration-1000 pt-20 px-2 md:px-5 pb-4 ${showNav ? 'md:ml-60' : ''}`}>

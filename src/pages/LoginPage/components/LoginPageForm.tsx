@@ -6,6 +6,7 @@ import AppContext from '../../../contexts/appContext';
 import { decodeTokenPayload } from '../../../utils/decryption';
 import { IUserState } from '../../../contexts/appContext/model';
 import { useNavigate } from 'react-router-dom';
+import { AUTH_TOKEN } from '../../../config/constants';
 
 interface IFieldUserNameState {
   error: string;
@@ -93,9 +94,8 @@ export default function LoginPageForm() {
       };
       try {
         const response = await axiosApiClient.post(axiosApiClient.URLS.api.POST_AUTH_VALIDATE_URL, req);
-        console.log(response.data);
         const decoded = decodeTokenPayload(response.data.token);
-        localStorage.setItem("token",response.data.token)
+        localStorage.setItem(AUTH_TOKEN,response.data.token)
         appContext.setUser(decoded.payload as IUserState);
         appContext.setLoader(false);
         navigate("/dashboard");
@@ -165,7 +165,7 @@ export default function LoginPageForm() {
             {password.show ? <FaEyeSlash /> : <FaEye />}
           </button> */}
         </div>
-        <p id="username-error" className="mt-2 text-sm text-red-600">
+        <p className="mt-2 text-sm text-red-600">
           {password.error}
         </p>
       </div>

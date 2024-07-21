@@ -9,6 +9,7 @@ function App() {
   const [loader, setLoader] = useState<boolean>(false);
   const [showNav, setShowNav] = useState<boolean>(true);
   const [user, setUser] = useState<IUserState>({
+    id: 0,
     firstName: '',
     lastName: '',
     role: ''
@@ -24,7 +25,7 @@ function App() {
         setShowNav
       }}>
       {loader ? <Loader /> : <></>}
-      <RouterProvider router={router}  />
+      <RouterProvider router={router} />
     </AppContext.Provider>
   );
 }
