@@ -16,6 +16,7 @@ import AppContext from '../../../../contexts/appContext';
 import debounce from 'debounce-promise';
 import DemandPopupForm from '../DemandPopupForm';
 import DemandNotifyPopup from '../DemandNotifyPopup';
+import { EUserRole } from '../../../../contexts/appContext/model';
 
 interface IOperation {
   search: string;
@@ -30,7 +31,7 @@ interface IDemandNotificationPopup {
 }
 
 export default function DemandList() {
-  const { setLoader } = useContext(AppContext);
+  const { user, setLoader } = useContext(AppContext);
   const [demandForm, setDemandForm] = useState<IDemandFormState>(getInitDemandFormState());
   const [operation, setOperation] = useState<IOperation>({
     search: '',
@@ -53,19 +54,22 @@ export default function DemandList() {
   const getDemands = useCallback(async () => {
     try {
       setLoader(true);
-      const response = await axiosApiClient.post(
-        axiosApiClient.URLS.api.GET_DEMANDS_URL,
-        operation,
-        {
-          Authorization: getAuthToken()
-        }
-      );
+      const request: any = { ...operation };
+      if (user.role === EUserRole.BUHEAD) {
+        request.businessUnit = user.businessUnit?.id;
+      } else if (user.role === EUserRole.BUPLATFORMHEAD) {
+        request.businessUnit = user.businessUnit?.id;
+        request.platform = user.platform?.id;
+      }
+      const response = await axiosApiClient.post(axiosApiClient.URLS.api.GET_DEMANDS_URL, request, {
+        Authorization: getAuthToken()
+      });
       setDemands(response.data);
     } catch (e) {
       console.log(e);
     }
     setLoader(false);
-  }, [operation, setDemands, setLoader]);
+  }, [operation, user, setDemands, setLoader]);
 
   useEffect(() => {
     getDemands();
@@ -88,7 +92,7 @@ export default function DemandList() {
         title: 'Successfully submitted',
         description: ''
       });
-      getDemands();
+      setOperation((prev) => ({ ...prev, search: '', currentPage: 0 }));
     }
   };
 
@@ -119,12 +123,16 @@ export default function DemandList() {
             <p className="mt-2 text-sm text-gray-700">A list of all the demands</p>
           </div>
           <div className="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
-            <button
-              onClick={() => onAddForm()}
-              type="button"
-              className="block rounded-md bg-primary-dark px-3 py-2 text-center text-sm font-ltc-m text-white shadow-sm hover:bg-primary-light focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-light">
-              Add Demand
-            </button>
+            {user.role === EUserRole.ADMIN ? (
+              <button
+                onClick={() => onAddForm()}
+                type="button"
+                className="block rounded-md bg-primary-dark px-3 py-2 text-center text-sm font-ltc-m text-white shadow-sm hover:bg-primary-light focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-light">
+                Add Demand
+              </button>
+            ) : (
+              <></>
+            )}
           </div>
         </div>
         <div className="-mx-4 mt-8 sm:-mx-0">
@@ -150,6 +158,11 @@ export default function DemandList() {
           <table className="min-w-full divide-y divide-gray-300">
             <thead>
               <tr>
+                <th
+                  scope="col"
+                  className="py-3.5 pl-4 pr-3 text-left text-sm font-ltc-m text-black sm:pl-0">
+                  Demand ID
+                </th>
                 <th
                   scope="col"
                   className="py-3.5 pl-4 pr-3 text-left text-sm font-ltc-m text-black sm:pl-0">
@@ -196,7 +209,10 @@ export default function DemandList() {
             </thead>
             <tbody className="divide-y divide-gray-200 bg-white">
               {demands.list.map((item) => (
-                <tr key={item.id}>
+                <tr key={'DEMANDS_TR_' + item.id}>
+                  <td className="w-full max-w-0 py-4 pl-4 pr-3 text-sm text-black font-ltc-m sm:w-auto sm:max-w-none sm:pl-0">
+                    {item.businessUnit.id}
+                  </td>
                   <td className="w-full max-w-0 py-4 pl-4 pr-3 text-sm text-black font-ltc-m sm:w-auto sm:max-w-none sm:pl-0">
                     {item.businessUnit.name}
                   </td>
@@ -254,7 +270,11 @@ export default function DemandList() {
           />
         </div>
       </div>
-      <DemandPopupForm open={demandPopUpOpen} demandForm={demandForm} setOpen={onToggleDemandForm} />
+      <DemandPopupForm
+        open={demandPopUpOpen}
+        demandForm={demandForm}
+        setOpen={onToggleDemandForm}
+      />
       <DemandNotifyPopup
         {...demandNotificationPopup}
         setOpen={(value: boolean) => {

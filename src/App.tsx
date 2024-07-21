@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { RouterProvider } from 'react-router-dom';
 import { router } from './routes';
 import AppContext from './contexts/appContext';
-import { IUserState } from './contexts/appContext/model';
+import { EUserRole, IUserState } from './contexts/appContext/model';
 import Loader from './components/common/Loader';
 
 function App() {
@@ -12,7 +12,9 @@ function App() {
     id: 0,
     firstName: '',
     lastName: '',
-    role: ''
+    role: EUserRole.BUPLATFORMHEAD,
+    businessUnit:null,
+    platform:null
   });
 
   return (

@@ -1,8 +1,21 @@
+interface IName{
+    id:number;
+    name:string
+}
+
+export enum EUserRole {
+    ADMIN = 'ADMIN',
+    BUHEAD = 'BUHEAD',
+    BUPLATFORMHEAD = 'BUPLATFORMHEAD',
+}
+
 export interface IUserState{
     id:number;
     firstName:string;
     lastName:string;
-    role:string
+    role:EUserRole;
+    businessUnit:IName | null;
+    platform:IName | null
 }
 
 export interface IAppContext{

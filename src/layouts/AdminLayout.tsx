@@ -5,6 +5,7 @@ import { getLocalToken } from '../utils';
 import { decodeTokenPayload } from '../utils/decryption';
 import { useNavigate } from 'react-router-dom';
 import Loader from '../components/common/Loader';
+import { EUserRole } from '../contexts/appContext/model';
 
 const AdminLayout: React.FC<{ children: ReactNode }> = ({ children }) => {
   const navigate = useNavigate();
@@ -15,18 +16,20 @@ const AdminLayout: React.FC<{ children: ReactNode }> = ({ children }) => {
     if (token) {
       if (!user.id) {
         const decoded = decodeTokenPayload(token);
-        if (decoded.expired || !decoded.payload) {
+        if (decoded.expired || EUserRole[decoded.payload.role]) {
           navigate('/');
           return null;
         } else {
           setUser(decoded.payload);
         }
+      }else if(!EUserRole[user.role]){
+        navigate('/');
       }
       setLoad(true);
     } else {
       navigate('/');
     }
-  }, [user]);
+  }, [user,navigate,setUser]);
 
   useEffect(() => {
     validateToken();
