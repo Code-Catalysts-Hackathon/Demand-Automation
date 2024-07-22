@@ -14,6 +14,7 @@ export interface IDemand {
   tertiarySkill: IValue;
   grade: string;
   buHeadName: string;
+  department: string;
   demandDate: string;
   status: string;
   comments: string;

@@ -197,6 +197,9 @@ export default function DemandList() {
                   BU Head
                 </th>
                 <th scope="col" className="px-3 py-3.5 text-left text-sm font-ltc-m text-black">
+                  Department
+                </th>
+                <th scope="col" className="px-3 py-3.5 text-left text-sm font-ltc-m text-black">
                   Demand Date
                 </th>
                 <th scope="col" className="px-3 py-3.5 text-left text-sm font-ltc-m text-black">
@@ -239,6 +242,9 @@ export default function DemandList() {
                   </td>
                   <td className="px-3 py-4 text-sm text-black font-ltc-r lg:table-cell">
                     {item.buHeadName}
+                  </td>
+                  <td className="px-3 py-4 text-sm text-black font-ltc-r lg:table-cell">
+                    {item.department}
                   </td>
                   <td className="px-3 py-4 text-sm text-black font-ltc-r lg:table-cell">
                     {item.demandDate}

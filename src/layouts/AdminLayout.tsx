@@ -1,7 +1,7 @@
 import React, { ReactNode, useCallback, useContext, useEffect, useState } from 'react';
 import AppContext from '../contexts/appContext';
 import HeaderSidebar from '../components/Headers/HeaderSidebar';
-import { getLocalToken } from '../utils';
+import { getLocalToken, isExistRole } from '../utils';
 import { decodeTokenPayload } from '../utils/decryption';
 import { useNavigate } from 'react-router-dom';
 import Loader from '../components/common/Loader';
@@ -16,13 +16,13 @@ const AdminLayout: React.FC<{ children: ReactNode }> = ({ children }) => {
     if (token) {
       if (!user.id) {
         const decoded = decodeTokenPayload(token);
-        if (decoded.expired || EUserRole[decoded.payload.role]) {
+        if (decoded.expired || !isExistRole(decoded.payload.role)) {
           navigate('/');
           return null;
         } else {
           setUser(decoded.payload);
         }
-      }else if(!EUserRole[user.role]){
+      }else if(!isExistRole(user.role)){
         navigate('/');
       }
       setLoad(true);

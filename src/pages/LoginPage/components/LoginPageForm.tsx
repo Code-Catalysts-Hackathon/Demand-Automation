@@ -174,7 +174,7 @@ export default function LoginPageForm() {
         <button
           type="submit"
           className="flex w-full justify-center rounded-md bg-primary px-3 py-1.5 text-sm font-bold font-ltc-b leading-6 text-white shadow-sm hover:bg-primary-dark focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-dark">
-          Sign in
+          Add
         </button>
       </div>
     </form>

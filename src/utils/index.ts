@@ -1,4 +1,5 @@
 import { AUTH_TOKEN } from "../config/constants";
+import { EUserRole } from "../contexts/appContext/model";
 
 export const getLocalToken = () => {
   return localStorage.getItem(AUTH_TOKEN);
@@ -74,4 +75,12 @@ export const getPaginationList = (currentPage:number, totalPages:number, perSlid
         }
     }
     return pageslist;
+}
+
+
+export const isExistRole = (role:string)=>{
+  const values = Object.values(EUserRole);
+  return values.some((roleName:string)=>{
+    return roleName===role
+  })
 }
