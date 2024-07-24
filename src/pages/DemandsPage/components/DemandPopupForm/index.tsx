@@ -1,6 +1,6 @@
 import React, { FormEvent, useContext, useEffect, useState } from 'react';
 import Modal from '../../../../components/common/Modal';
-import CustomReactSelect from '../../../../components/common/CustomReactSelect';
+import { CustomReactSelectAsync } from '../../../../components/common/CustomReactSelect';
 import { ImCross } from 'react-icons/im';
 import axiosApiClient from '../../../../config/axiosConfig';
 import { getAuthToken } from '../../../../utils';
@@ -324,7 +324,7 @@ export default function DemandPopupForm({ open, setOpen, demandForm }: IDemandPo
               </label>
               <div className="mt-2">
                 <div>
-                  <CustomReactSelect
+                  <CustomReactSelectAsync
                     loadOptions={loadBusinessUnitOptions}
                     onChange={onSelectBusinessUnit}
                     value={formState.businessUnit}
@@ -342,7 +342,7 @@ export default function DemandPopupForm({ open, setOpen, demandForm }: IDemandPo
               </label>
               <div className="mt-2">
                 <div>
-                  <CustomReactSelect
+                  <CustomReactSelectAsync
                     loadOptions={loadPlatformOptions}
                     onChange={onSelectPlatform}
                     value={formState.platform}
@@ -358,7 +358,7 @@ export default function DemandPopupForm({ open, setOpen, demandForm }: IDemandPo
               </label>
               <div className="mt-2">
                 <div>
-                  <CustomReactSelect
+                  <CustomReactSelectAsync
                     loadOptions={loadLabOptions}
                     onChange={onSelectLab}
                     value={formState.lab}
@@ -376,7 +376,7 @@ export default function DemandPopupForm({ open, setOpen, demandForm }: IDemandPo
               </label>
               <div className="mt-2">
                 <div>
-                  <CustomReactSelect
+                  <CustomReactSelectAsync
                     loadOptions={loadFeatureTeamsOptions}
                     onChange={onSelectFeatureTeam}
                     value={formState.featureTeam}
@@ -394,7 +394,7 @@ export default function DemandPopupForm({ open, setOpen, demandForm }: IDemandPo
               </label>
               <div className="mt-2">
                 <div>
-                  <CustomReactSelect
+                  <CustomReactSelectAsync
                     loadOptions={loadSkillsOptions}
                     onChange={onSelectPrimarySkill}
                     value={formState.primarySkill}
@@ -412,7 +412,7 @@ export default function DemandPopupForm({ open, setOpen, demandForm }: IDemandPo
               </label>
               <div className="mt-2">
                 <div>
-                  <CustomReactSelect
+                  <CustomReactSelectAsync
                     loadOptions={loadSkillsOptions}
                     onChange={onSelectSecondarySkill}
                     value={formState.secondarySkill}
@@ -430,7 +430,7 @@ export default function DemandPopupForm({ open, setOpen, demandForm }: IDemandPo
               </label>
               <div className="mt-2">
                 <div>
-                  <CustomReactSelect
+                  <CustomReactSelectAsync
                     loadOptions={loadSkillsOptions}
                     onChange={onSelectTertiarySkill}
                     value={formState.tertiarySkill}

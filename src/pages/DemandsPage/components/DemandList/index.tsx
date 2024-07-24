@@ -9,17 +9,24 @@ import {
   IDemandListResponse
 } from '../../models';
 import { Link } from 'react-router-dom';
-import { FaEye, FaPencilAlt, FaSearch } from 'react-icons/fa';
+import { FaEye, FaPencilAlt } from 'react-icons/fa';
 import { RiDeleteBin3Fill } from 'react-icons/ri';
 import Pagination from '../../../../components/common/Pagination';
 import AppContext from '../../../../contexts/appContext';
-import debounce from 'debounce-promise';
 import DemandPopupForm from '../DemandPopupForm';
 import DemandNotifyPopup from '../DemandNotifyPopup';
 import { EUserRole } from '../../../../contexts/appContext/model';
+import DemandFilters from '../DemandFilters';
 
+interface IOption {
+  label: string;
+  value: string;
+}
 interface IOperation {
-  search: string;
+  businessUnit: IOption;
+  platform: IOption;
+  lab: IOption;
+  status: string;
   entriesPerPage: number;
   currentPage: number;
 }
@@ -34,7 +41,10 @@ export default function DemandList() {
   const { user, setLoader } = useContext(AppContext);
   const [demandForm, setDemandForm] = useState<IDemandFormState>(getInitDemandFormState());
   const [operation, setOperation] = useState<IOperation>({
-    search: '',
+    businessUnit: { label: '', value: '' },
+    platform: { label: '', value: '' },
+    lab: { label: '', value: '' },
+    status: '',
     entriesPerPage: 5,
     currentPage: 0
   });
@@ -54,7 +64,15 @@ export default function DemandList() {
   const getDemands = useCallback(async () => {
     try {
       setLoader(true);
-      const request: any = { ...operation };
+      const { currentPage, entriesPerPage, businessUnit, platform, lab, status } = operation;
+      const request: any = {
+        currentPage,
+        entriesPerPage,
+        businessUnit: businessUnit.value ? businessUnit.value : undefined,
+        platform: platform.value ? platform.value : undefined,
+        lab: lab.value ? lab.value : undefined,
+        status: status ? status : undefined
+      };
       if (user.role === EUserRole.BUHEAD) {
         request.businessUnit = user.businessUnit?.id;
       } else if (user.role === EUserRole.BUPLATFORMHEAD) {
@@ -106,14 +124,39 @@ export default function DemandList() {
     onToggleDemandForm(true);
   };
 
-  const onSearch = (search: string) => {
-    setOperation((prev) => ({
-      ...prev,
-      search,
-      currentPage: 0
-    }));
+  const onFiltersSearch = (name: string, value: IOption | string) => {
+    switch (name) {
+      case 'businessUnit':
+        setOperation((prev) => ({
+          ...prev,
+          businessUnit: value as IOption,
+          currentPage: 0
+        }));
+        break;
+      case 'platform':
+        setOperation((prev) => ({
+          ...prev,
+          platform: value as IOption,
+          currentPage: 0
+        }));
+        break;
+      case 'lab':
+        setOperation((prev) => ({
+          ...prev,
+          lab: value as IOption,
+          currentPage: 0
+        }));
+        break;
+      case 'status':
+        setOperation((prev) => ({
+          ...prev,
+          status: (value as IOption).value,
+          currentPage: 0
+        }));
+        break;
+    }
   };
-  const onSearchDebounce = debounce(onSearch, 500);
+
   return (
     <>
       <div className="px-4 sm:px-2">
@@ -123,7 +166,7 @@ export default function DemandList() {
             <p className="mt-2 text-sm text-gray-700">A list of all the demands</p>
           </div>
           <div className="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
-            {user.role === EUserRole.ADMIN ? (
+            {user.role === EUserRole.LBGADMIN ? (
               <button
                 onClick={() => onAddForm()}
                 type="button"
@@ -136,23 +179,15 @@ export default function DemandList() {
           </div>
         </div>
         <div className="-mx-4 mt-8 sm:-mx-0">
-          <div className="flex">
-            <div className="ml-auto">
-              <div>
-                <div className="relative rounded-md shadow-sm">
-                  <input
-                    id="search"
-                    name="search"
-                    type="text"
-                    placeholder="Search"
-                    onChange={(e) => onSearchDebounce(e.target.value)}
-                    className="block w-full rounded-md border-0 py-1.5 pr-10 text-black ring-1 ring-inset ring-primary-dark placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6"
-                  />
-                  <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
-                    <FaSearch aria-hidden="true" className="h-5 w-5 text-primary-dark" />
-                  </div>
-                </div>
-              </div>
+          <div className="flex items-center">
+            <div className="flex-1">
+              <DemandFilters
+                onFilter={onFiltersSearch}
+                businessUnit={operation.businessUnit}
+                platform={operation.platform}
+                lab={operation.lab}
+                status={operation.status}
+              />
             </div>
           </div>
           <table className="min-w-full divide-y divide-gray-300">
@@ -253,16 +288,26 @@ export default function DemandList() {
                     {item.status}
                   </td>
 
-                  <td className="py-4 pl-3 pr-4 flex gap-[5px] items-center text-sm font-medium sm:pr-0">
-                    <Link to="#" title="Edit" className="text-primary-dark hover:text-primary">
-                      <FaPencilAlt onClick={() => onEdit(item)} />
-                    </Link>
+                  <td className="py-4 pl-3 pr-4 flex gap-[5px] justify-center items-center text-sm font-medium sm:pr-0">
+                    {user.role === EUserRole.LBGADMIN ? (
+                      <Link to="#" title="Edit" className="text-primary-dark hover:text-primary">
+                        <FaPencilAlt onClick={() => onEdit(item)} />
+                      </Link>
+                    ) : (
+                      <></>
+                    )}
+
                     <Link to="#" title="View" className="text-primary-dark hover:text-primary">
                       <FaEye />
                     </Link>
-                    <Link to="#" title="Delete" className="text-red-600 hover:text-red-500">
-                      <RiDeleteBin3Fill />
-                    </Link>
+
+                    {user.role === EUserRole.LBGADMIN ? (
+                      <Link to="#" title="Delete" className="text-red-600 hover:text-red-500">
+                        <RiDeleteBin3Fill />
+                      </Link>
+                    ) : (
+                      <></>
+                    )}
                   </td>
                 </tr>
               ))}

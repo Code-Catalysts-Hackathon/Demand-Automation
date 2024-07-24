@@ -1,0 +1,1 @@
+export const demandStatusList = ["Draft","Pending","Approved","Rejected"];

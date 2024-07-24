@@ -5,7 +5,8 @@
     @apply ring-primary-light;
     @apply border-none;
     &[class*='react-select__control--is-focused'] {
-      &:focus,&:hover {
+      &:focus,
+      &:hover {
         @apply ring-2;
         @apply ring-inset;
         @apply ring-primary-light;
@@ -14,6 +15,18 @@
     input[class='react-select__input'] {
       &:focus {
         @apply ring-0;
+      }
+    }
+  }
+  div[class*='react-select__option'] {
+    &[class*='react-select__option--is-selected'] {
+      @apply bg-primary-dark #{!important};
+    }
+    &[class*='react-select__option--is-focused'] {
+      &:focus,
+      &:hover {
+        @apply bg-primary-light;
+        @apply bg-opacity-25;
       }
     }
   }

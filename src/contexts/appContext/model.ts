@@ -4,7 +4,8 @@ interface IName{
 }
 
 export enum EUserRole {
-    ADMIN = 'ADMIN',
+    LBGADMIN = 'LBGADMIN',
+    LTCADMIN = 'LTCADMIN',
     BUHEAD = 'BUHEAD',
     BUPLATFORMHEAD = 'BUPLATFORMHEAD',
 }
