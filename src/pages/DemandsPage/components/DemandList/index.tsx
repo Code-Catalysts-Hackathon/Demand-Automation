@@ -297,7 +297,7 @@ export default function DemandList() {
                       <></>
                     )}
 
-                    <Link to="#" title="View" className="text-primary-dark hover:text-primary">
+                    <Link to={"/demands/"+item.id} title="View" className="text-primary-dark hover:text-primary">
                       <FaEye />
                     </Link>
 
@@ -321,20 +321,26 @@ export default function DemandList() {
           />
         </div>
       </div>
-      <DemandPopupForm
-        open={demandPopUpOpen}
-        demandForm={demandForm}
-        setOpen={onToggleDemandForm}
-      />
-      <DemandNotifyPopup
-        {...demandNotificationPopup}
-        setOpen={(value: boolean) => {
-          setDemandNotificationPopup((prev: IDemandNotificationPopup) => ({
-            ...prev,
-            open: value
-          }));
-        }}
-      />
+      {user.role === EUserRole.LBGADMIN ? (
+        <>
+          <DemandPopupForm
+            open={demandPopUpOpen}
+            demandForm={demandForm}
+            setOpen={onToggleDemandForm}
+          />
+          <DemandNotifyPopup
+            {...demandNotificationPopup}
+            setOpen={(value: boolean) => {
+              setDemandNotificationPopup((prev: IDemandNotificationPopup) => ({
+                ...prev,
+                open: value
+              }));
+            }}
+          />
+        </>
+      ) : (
+        <></>
+      )}
     </>
   );
 }

@@ -97,7 +97,7 @@ export default function DemandFilters({
     try {
         console.log(user,user.role === EUserRole.BUPLATFORMHEAD)
       const response = await axiosApiClient.get(
-        axiosApiClient.URLS.api.GET_BUSINESS_UNITS_URL,
+        axiosApiClient.URLS.api.GET_PLATFORMS_URL,
         {
           businessUnitId: (user.role === EUserRole.BUPLATFORMHEAD || user.role === EUserRole.BUHEAD )?user.businessUnit?.id:businessUnit.value,
           search: value
@@ -122,7 +122,7 @@ export default function DemandFilters({
   const loadLabOptions = useCallback(async (value: string) => {
     try {
       const response = await axiosApiClient.get(
-        axiosApiClient.URLS.api.GET_BUSINESS_UNITS_URL,
+        axiosApiClient.URLS.api.GET_LABS_URL,
         {
           businessUnitId: (user.role === EUserRole.BUPLATFORMHEAD || user.role === EUserRole.BUHEAD)?user.businessUnit?.id:businessUnit.value,
           platform:(user.role === EUserRole.BUPLATFORMHEAD)?user.platform?.id:platform.value,

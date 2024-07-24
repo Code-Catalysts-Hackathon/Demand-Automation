@@ -4,6 +4,7 @@ import DashboardPage from "../pages/DashboardPage";
 import DemandsPage from "../pages/DemandsPage";
 import ErrorPage from "../pages/ErrorPage";
 import EmployeePage from "../pages/EmployeePage";
+import DemandDetailsPage from "../pages/DemandDetailsPage";
 
 export const router = createBrowserRouter([
     {
@@ -17,6 +18,10 @@ export const router = createBrowserRouter([
     {
       path: "/demands",
       element: <DemandsPage />
+    },
+    {
+      path: "/demands/:id",
+      element: <DemandDetailsPage />
     },
     {
       path:"/employee",

@@ -125,7 +125,7 @@ export default function DemandPopupForm({ open, setOpen, demandForm }: IDemandPo
   const loadPlatformOptions = async (value: string) => {
     try {
       const response = await axiosApiClient.get(
-        axiosApiClient.URLS.api.GET_BUSINESS_UNITS_URL,
+        axiosApiClient.URLS.api.GET_PLATFORMS_URL,
         {
           businessUnitId: formState.businessUnit.value || undefined,
           search: value
@@ -150,7 +150,7 @@ export default function DemandPopupForm({ open, setOpen, demandForm }: IDemandPo
   const loadLabOptions = async (value: string) => {
     try {
       const response = await axiosApiClient.get(
-        axiosApiClient.URLS.api.GET_BUSINESS_UNITS_URL,
+        axiosApiClient.URLS.api.GET_LABS_URL,
         {
           businessUnitId: formState.businessUnit.value || undefined,
           platformId: formState.platform.value || undefined,
