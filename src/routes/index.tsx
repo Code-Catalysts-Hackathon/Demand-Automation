@@ -3,6 +3,7 @@ import LoginPage from "../pages/LoginPage";
 import DashboardPage from "../pages/DashboardPage";
 import DemandsPage from "../pages/DemandsPage";
 import ErrorPage from "../pages/ErrorPage";
+import EmployeePage from "../pages/EmployeePage";
 
 export const router = createBrowserRouter([
     {
@@ -16,6 +17,10 @@ export const router = createBrowserRouter([
     {
       path: "/demands",
       element: <DemandsPage />
+    },
+    {
+      path:"/employee",
+      element:<EmployeePage />
     },
     {
       path: "*",

@@ -15,17 +15,16 @@ import {
 interface IDemandPopupFormProps {
   open: boolean;
   setOpen: (value: boolean, submitted?: boolean) => void;
-  demandForm:IDemandFormState;
+  demandForm: IDemandFormState;
 }
 
 export default function DemandPopupForm({ open, setOpen, demandForm }: IDemandPopupFormProps) {
   const { setLoader } = useContext(AppContext);
   const [formState, setFormState] = useState<IDemandFormState>(getInitDemandFormState());
 
-
-  useEffect(()=>{
-    setFormState({...demandForm});
-  },[demandForm])
+  useEffect(() => {
+    setFormState({ ...demandForm });
+  }, [demandForm]);
 
   const onSelectBusinessUnit = ({ label, value }: IDemandOption) => {
     setFormState((prev) => {
@@ -34,7 +33,6 @@ export default function DemandPopupForm({ open, setOpen, demandForm }: IDemandPo
       return st;
     });
   };
-  
 
   const onSelectPlatform = ({ label, value }: IDemandOption) => {
     setFormState((prev) => {
@@ -287,16 +285,20 @@ export default function DemandPopupForm({ open, setOpen, demandForm }: IDemandPo
         demandDate: formState.demandDate.value
       };
       try {
-        if(formState.id){
-          await axiosApiClient.post(axiosApiClient.URLS.api.PUT_DEMAND_URL+"/"+formState.id, request, {
-            Authorization: getAuthToken()
-          });
-        }else{
+        if (formState.id) {
+          await axiosApiClient.post(
+            axiosApiClient.URLS.api.PUT_DEMAND_URL + '/' + formState.id,
+            request,
+            {
+              Authorization: getAuthToken()
+            }
+          );
+        } else {
           await axiosApiClient.post(axiosApiClient.URLS.api.POST_CREATE_DEMAND_URL, request, {
             Authorization: getAuthToken()
           });
         }
-        
+
         setOpen(false, true);
       } catch (e) {
         console.log(e);
@@ -481,7 +483,7 @@ export default function DemandPopupForm({ open, setOpen, demandForm }: IDemandPo
               <button
                 type="submit"
                 className="flex w-full justify-center rounded-md bg-primary px-3 py-1.5 text-sm font-bold font-ltc-b leading-6 text-white shadow-sm hover:bg-primary-dark focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-dark">
-                Sign in
+                Submit
               </button>
             </div>
           </form>
