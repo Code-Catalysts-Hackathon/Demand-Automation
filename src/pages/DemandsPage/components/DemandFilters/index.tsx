@@ -149,7 +149,7 @@ export default function DemandFilters({
     <div className="grid grid-cols-5 gap-3">
       {user.role === EUserRole.LBGADMIN || user.role === EUserRole.LTCADMIN ? (
         <div>
-          <label className="block text-xs font-ltc-m leading-6 text-black">Business Unit</label>
+          <label className="block text-xs font-ltc-b leading-6 text-black">Business Unit</label>
           <div className="mt-1">
             <CustomReactSelectAsync
               placeHolder={'Select Business Unit'}
@@ -165,7 +165,7 @@ export default function DemandFilters({
 
       {showPlatform ? (
         <div>
-          <label className="block text-xs font-ltc-m leading-6 text-black">Platform</label>
+          <label className="block text-xs font-ltc-b leading-6 text-black">Platform</label>
           <div className="mt-1">
             <CustomReactSelectAsync
               placeHolder={'Select Platform'}
@@ -181,7 +181,7 @@ export default function DemandFilters({
 
       {showLab ? (
         <div>
-          <label className="block text-xs font-ltc-m leading-6 text-black">Lab</label>
+          <label className="block text-xs font-ltc-b leading-6 text-black">Lab</label>
           <div className="mt-1">
             <CustomReactSelectAsync
               placeHolder={'Select Lab'}
@@ -196,7 +196,7 @@ export default function DemandFilters({
       )}
 
       <div>
-        <label className="block text-xs font-ltc-m leading-6 text-black">Status</label>
+        <label className="block text-xs font-ltc-b leading-6 text-black">Status</label>
         <div className="mt-1">
           <CustomReactSelect
             placeHolder={'Select Status'}

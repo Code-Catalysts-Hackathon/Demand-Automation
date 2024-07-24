@@ -18,12 +18,14 @@ export default function HeaderSidebar() {
     <>
       <div className="fixed w-full z-30 flex bg-primary-dark dark:bg-[#0F172A] p-2 items-center justify-center h-16 px-10">
         <div className="logo ml-12 dark:text-white  transform ease-in-out duration-500 flex-none h-full flex items-center justify-center">
-          <LogoSVG />
+          <Link to={'/dashboard'}>
+            <LogoSVG />
+          </Link>
         </div>
         <div className="grow h-full flex items-center justify-center"></div>
         <div className="flex-none h-full text-center flex items-center justify-center">
           <div className="flex space-x-3 items-center px-3">
-            <UserDropDown/>
+            <UserDropDown />
           </div>
         </div>
       </div>
@@ -43,9 +45,9 @@ export default function HeaderSidebar() {
           </div>
         </div>
         <div className="absolute w-full">
-          <div>
+          <Link to={'/dashboard'}>
             <LogoSVG className={`mx-auto`} />
-          </div>
+          </Link>
         </div>
         <div
           className={`max  text-white mt-20 flex-col space-y-2 w-full h-[calc(100vh)] ${!showNav ? 'hidden' : 'flex'}`}>
