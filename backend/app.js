@@ -10,7 +10,7 @@ const getJWT = () => {
     id: 123456,
     firstName: "john",
     lastName: "doe",
-    role: "ADMIN",
+    role: "LTCADMIN",
     businessUnit:{
         id:1,
         name:"CL"
