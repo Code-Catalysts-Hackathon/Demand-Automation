@@ -5,7 +5,6 @@ import { getLocalToken, isExistRole } from '../utils';
 import { decodeTokenPayload } from '../utils/decryption';
 import { useNavigate } from 'react-router-dom';
 import Loader from '../components/common/Loader';
-import { EUserRole } from '../contexts/appContext/model';
 
 const AdminLayout: React.FC<{ children: ReactNode }> = ({ children }) => {
   const navigate = useNavigate();
