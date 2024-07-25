@@ -15,3 +15,6 @@ COPY . .
 
 # Run the build process (modify as needed)
 RUN npm run build
+
+options:
+  logging: CLOUD_LOGGING_ONLY
