@@ -15,6 +15,6 @@ steps:
   - 'gcr.io/$PROJECT_ID/$REPO_NAME:test-tag'
   - '.'
 images:
-- 'gcr.io/$PROJECT_ID/$REPO_NAME:$COMMIT_SHA'
+- 'gcr.io/$PROJECT_ID/$REPO_NAME:test-tag'
 options:
   logging: CLOUD_LOGGING_ONLY
