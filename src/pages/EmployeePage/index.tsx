@@ -1,6 +1,4 @@
-
-import withLayout from '../../layouts/withLayout'
-
+import withLayout from '../../layouts/withLayout';
 import React, { useState } from 'react';
 
 interface Employee {
@@ -62,60 +60,54 @@ const EmployeePage: React.FC = () => {
   };
 
   return (
-    <div>
-      <h1 style={{ fontWeight: 'bold' }}>Employees</h1>
-      <p>A list of employees</p>
-      <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '20px' }}>
+    <div className="p-6">
+      <h1 className="text-2xl font-bold mb-2">Employees</h1>
+      <p className="mb-6">A list of employees</p>
+      <div className="flex justify-between mb-5">
         <div></div>
         <input
           type="text"
           placeholder="Search..."
           value={searchTerm}
           onChange={handleSearchChange}
-          style={{ padding: '10px', width: '300px' }}
+          className="p-2 w-80 border rounded"
         />
       </div>
-      <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+      <table className="w-full border-collapse">
         <thead>
           <tr>
-            <th style={{ border: '1px solid #ddd', padding: '8px', textAlign: 'left' }}>Serial Number</th>
-            <th style={{ border: '1px solid #ddd', padding: '8px', textAlign: 'left' }}>Employee Name</th>
-            <th style={{ border: '1px solid #ddd', padding: '8px', textAlign: 'left' }}>Phone Number</th>
-            <th style={{ border: '1px solid #ddd', padding: '8px', textAlign: 'left' }}>Email</th>
-            <th style={{ border: '1px solid #ddd', padding: '8px', textAlign: 'left' }}>Platform Name</th>
-            <th style={{ border: '1px solid #ddd', padding: '8px', textAlign: 'left' }}>Lab Name</th>
-            <th style={{ border: '1px solid #ddd', padding: '8px', textAlign: 'left' }}>Feature Team</th>
-            <th style={{ border: '1px solid #ddd', padding: '8px', textAlign: 'left' }}>Business Unit</th>
+            <th className="border border-gray-300 p-2 text-left">Serial Number</th>
+            <th className="border border-gray-300 p-2 text-left">Employee Name</th>
+            <th className="border border-gray-300 p-2 text-left">Phone Number</th>
+            <th className="border border-gray-300 p-2 text-left">Email</th>
+            <th className="border border-gray-300 p-2 text-left">Platform Name</th>
+            <th className="border border-gray-300 p-2 text-left">Lab Name</th>
+            <th className="border border-gray-300 p-2 text-left">Feature Team</th>
+            <th className="border border-gray-300 p-2 text-left">Business Unit</th>
           </tr>
         </thead>
         <tbody>
-          {currentItems.map((employee, index) => (
-            <tr key={index}>
-              <td style={{ border: '1px solid #ddd', padding: '8px', textAlign: 'left' }}>{employee.serialNumber}</td>
-              <td style={{ border: '1px solid #ddd', padding: '8px', textAlign: 'left' }}>{employee.name}</td>
-              <td style={{ border: '1px solid #ddd', padding: '8px', textAlign: 'left' }}>{employee.phoneNumber}</td>
-              <td style={{ border: '1px solid #ddd', padding: '8px', textAlign: 'left' }}>{employee.email}</td>
-              <td style={{ border: '1px solid #ddd', padding: '8px', textAlign: 'left' }}>{employee.platformName}</td>
-              <td style={{ border: '1px solid #ddd', padding: '8px', textAlign: 'left' }}>{employee.labName}</td>
-              <td style={{ border: '1px solid #ddd', padding: '8px', textAlign: 'left' }}>{employee.featureTeam}</td>
-              <td style={{ border: '1px solid #ddd', padding: '8px', textAlign: 'left' }}>{employee.businessUnit}</td>
+          {currentItems.map((employee) => (
+            <tr key={employee.serialNumber}>
+              <td className="border border-gray-300 p-2 text-left">{employee.serialNumber}</td>
+              <td className="border border-gray-300 p-2 text-left">{employee.name}</td>
+              <td className="border border-gray-300 p-2 text-left">{employee.phoneNumber}</td>
+              <td className="border border-gray-300 p-2 text-left">{employee.email}</td>
+              <td className="border border-gray-300 p-2 text-left">{employee.platformName}</td>
+              <td className="border border-gray-300 p-2 text-left">{employee.labName}</td>
+              <td className="border border-gray-300 p-2 text-left">{employee.featureTeam}</td>
+              <td className="border border-gray-300 p-2 text-left">{employee.businessUnit}</td>
             </tr>
           ))}
         </tbody>
       </table>
-      <div style={{ marginTop: '20px', display: 'flex', justifyContent: 'flex-end' }}>
-        <button onClick={handlePrevPage} disabled={currentPage === 1}>Previous</button>
-        <span style={{ margin: '0 10px' }}>Page {currentPage} of {totalPages}</span>
-        <button onClick={handleNextPage} disabled={currentPage === totalPages}>Next</button>
+      <div className="mt-6 flex justify-end items-center">
+        <button onClick={handlePrevPage} disabled={currentPage === 1} className="px-4 py-2 bg-gray-200 text-gray-800 rounded mr-2 disabled:opacity-50">Previous</button>
+        <span className="mx-4">Page {currentPage} of {totalPages}</span>
+        <button onClick={handleNextPage} disabled={currentPage === totalPages} className="px-4 py-2 bg-gray-200 text-gray-800 rounded disabled:opacity-50">Next</button>
       </div>
     </div>
   );
 };
 
-
-
-
-
-
-
-export default withLayout(EmployeePage,'auth')
+export default withLayout(EmployeePage, 'auth');
