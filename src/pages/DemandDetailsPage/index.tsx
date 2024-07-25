@@ -6,6 +6,7 @@ import { getInitDemandDetailsState, IDemandDetails } from './model';
 import DetailsStagesComponent from './components/Stages';
 import { demandLogs, demandStages } from './utils';
 import DemandLogTimeline from './components/DemandLogTimeline';
+import DemandOperationView from './components/DemandOperationView';
 
 function DemandDetailsPage() {
   const params = useParams();
@@ -156,7 +157,9 @@ function DemandDetailsPage() {
 
             </div>
           </div>
-          <div className="col-span-1"></div>
+          <div className="col-span-1">
+            <DemandOperationView details={details} />
+          </div>
           <div className="col-span-1">
             <DemandLogTimeline list={demandLogs} />
           </div>
