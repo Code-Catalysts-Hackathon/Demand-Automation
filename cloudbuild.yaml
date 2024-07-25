@@ -1,5 +1,5 @@
 steps:
-- name: 'node:latest'
+- name: 'node:14'
   entrypoint: 'bash'
   args:
   - '-c'
@@ -12,9 +12,9 @@ steps:
   - '-f'
   - 'Dockerfile'
   - '-t'
-  - 'gcr.io/$PROJECT_ID/$IMAGE_NAME:$TAG_NUMBER'
+  - 'gcr.io/$PROJECT_ID/$REPO_NAME:$COMMIT_SHA'
   - '.'
 images:
-- 'gcr.io/$PROJECT_ID/$IMAGE_NAME:$TAG_NUMBER'
+- 'gcr.io/$PROJECT_ID/$REPO_NAME:$COMMIT_SHA'
 options:
   logging: CLOUD_LOGGING_ONLY
