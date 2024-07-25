@@ -16,4 +16,4 @@ images:
 - 'gcr.io/$PROJECT_ID/$REPO_NAME:$COMMIT_SHA'
 
 options:
-  logging: CLOUD_LOGGING_ONLY
+  logging: NONE
