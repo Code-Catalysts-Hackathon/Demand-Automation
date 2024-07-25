@@ -12,9 +12,9 @@ steps:
   - '-f'
   - 'Dockerfile'
   - '-t'
-  - 'gcr.io/$PROJECT_ID/$REPO_NAME:test-tag'
+  - 'gcr.io/$PROJECT_ID/ddemand-automation:test'
   - '.'
 images:
-- 'gcr.io/$PROJECT_ID/$REPO_NAME:test-tag'
+- 'gcr.io/$PROJECT_ID/demand-automation:test'
 options:
   logging: CLOUD_LOGGING_ONLY
