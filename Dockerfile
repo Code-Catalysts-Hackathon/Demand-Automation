@@ -1,5 +1,5 @@
 steps:
-- name: 'node:14'
+- name: 'node:latest'
   entrypoint: 'bash'
   args:
   - '-c'
