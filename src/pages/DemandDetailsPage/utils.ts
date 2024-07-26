@@ -1,20 +1,20 @@
 export const demandStages = [{
-    name:"Stage 1",
+    name:"LTC HR",
     completed:true,
     active:false,
 },
 {
-    name:"Stage 2",
+    name:"Business Unit",
     completed:true,
     active:false,
 },
 {
-    name:"Stage 3",
+    name:"Recritment",
     completed:false,
     active:true,
 },
 {
-    name:"Stage 4",
+    name:"OnBoarding",
     completed:false,
     active:false,
 }]

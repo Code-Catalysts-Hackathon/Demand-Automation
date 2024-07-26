@@ -63,8 +63,8 @@ const EmployeePage: React.FC = () => {
               <td className="border border-gray-300 p-2 text-left">{info.mobile}</td>
               <td className="border border-gray-300 p-2 text-left">{info.email}</td>
               <td className="border border-gray-300 p-2 text-left">{info.businessUnit}</td>
-              <td className="border border-gray-300 p-2 text-left">{info.platformName}</td>
-              <td className="border border-gray-300 p-2 text-left">{info.labName}</td>
+              <td className="border border-gray-300 p-2 text-left">{info.platform}</td>
+              <td className="border border-gray-300 p-2 text-left">{info.lab}</td>
               <td className="border border-gray-300 p-2 text-left">{info.featureTeam}</td>
             </tr>
           ))}
