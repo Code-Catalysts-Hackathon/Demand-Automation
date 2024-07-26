@@ -1,8 +1,8 @@
 import React from 'react'
 import withLayout from '../../layouts/withLayout';
-import DrillDownPieChart from '../../components/Charts/DrillDownPieChart';
-import DrillDownBarChart from '../../components/Charts/DrillDownBarChart';
+import DrillDownBarChart from '../../components/Charts/DrillDownLineChart';
 import PieSemiCircleChart from '../../components/Charts/PieSemiCircleChart';
+import DrillDownPieChart from '../../components/Charts/DrillDownPieChart';
 
 function DashboardPage() {
   return (
@@ -14,9 +14,9 @@ function DashboardPage() {
       <div>
         <DrillDownBarChart />
       </div>
-      <div>
+      {/* <div>
         <PieSemiCircleChart />
-      </div>
+      </div> */}
     </div>
   )
 }
