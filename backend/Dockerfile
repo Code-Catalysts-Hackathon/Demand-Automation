@@ -13,9 +13,6 @@ RUN npm install
 # Copy the entire project to the working directory
 COPY . .
 
-# Build React app
-RUN npm run build
-
 # Expose port 8080 to the outside world
 EXPOSE 8080
 
