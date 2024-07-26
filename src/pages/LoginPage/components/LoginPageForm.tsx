@@ -1,6 +1,5 @@
 import React, { FormEvent, useContext, useState } from 'react';
 import { allowOnlyNumsNo0Exp } from '../../../config/regexp';
-import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import axiosApiClient from '../../../config/axiosConfig';
 import AppContext from '../../../contexts/appContext';
 import { decodeTokenPayload } from '../../../utils/decryption';
@@ -51,13 +50,13 @@ export default function LoginPageForm() {
     setAuthStatus('');
   };
 
-  const onTogglePassword = () => {
-    setPassword((prev: IFieldPasswordState) => {
-      let st = { ...prev };
-      st.show = !st.show;
-      return st;
-    });
-  };
+  // const onTogglePassword = () => {
+  //   setPassword((prev: IFieldPasswordState) => {
+  //     let st = { ...prev };
+  //     st.show = !st.show;
+  //     return st;
+  //   });
+  // };
 
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault(); // Prevents the default form submission behavior

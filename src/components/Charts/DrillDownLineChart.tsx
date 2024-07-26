@@ -1,10 +1,10 @@
-import React,{useState} from 'react'
+import React from 'react'
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 
 
 const DrillDownBarChart = () => {
-  const [options, setOptions] = useState({
+  const options = ({
     chart: {
         type: 'line'
     },
