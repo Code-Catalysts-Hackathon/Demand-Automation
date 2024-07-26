@@ -22,6 +22,9 @@ FROM nginx:alpine
 # Copy built artifacts from the 'build' stage
 COPY --from=build /app/build /usr/share/nginx/html
 
+#COPY /etc/nginx/conf.d/default.conf /etc/nginx/conf.d/default.conf.bkp
+COPY default.conf /etc/nginx/conf.d/
+
 # Expose port 80 to the outside world
 EXPOSE 80
 
