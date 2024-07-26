@@ -39,7 +39,7 @@ app.use("*", cors());
 app.post("/api/auth/login", (req, res) => {
   console.log(req);
   res.json({
-    token: getJWT(role[req.body.userName]),
+    token: getJWT(userObj[req.body.userName]),
   });
 });
 
