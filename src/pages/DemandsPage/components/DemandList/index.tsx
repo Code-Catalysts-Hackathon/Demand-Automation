@@ -196,12 +196,12 @@ export default function DemandList() {
                 <th
                   scope="col"
                   className="py-3.5 pl-4 pr-3 text-left text-sm font-ltc-m text-black sm:pl-0">
-                  Demand ID
+                  ID
                 </th>
                 <th
                   scope="col"
                   className="py-3.5 pl-4 pr-3 text-left text-sm font-ltc-m text-black sm:pl-0">
-                  Business Unit
+                  Business&nbsp;Unit
                 </th>
                 <th
                   scope="col"
@@ -214,28 +214,22 @@ export default function DemandList() {
                   Lab
                 </th>
                 <th scope="col" className="px-3 py-3.5 text-left text-sm font-ltc-m text-black">
-                  Feature Team
+                  Feature&nbsp;Team
                 </th>
                 <th scope="col" className="px-3 py-3.5 text-left text-sm font-ltc-m text-black">
-                  Primary Skill
+                  Primary&nbsp;Skill
                 </th>
                 <th scope="col" className="px-3 py-3.5 text-left text-sm font-ltc-m text-black">
-                  Secondary Skill
-                </th>
-                <th scope="col" className="px-3 py-3.5 text-left text-sm font-ltc-m text-black">
-                  Tertiary Skill
+                  Secondary&nbsp;Skill
                 </th>
                 <th scope="col" className="px-3 py-3.5 text-left text-sm font-ltc-m text-black">
                   Grade
                 </th>
                 <th scope="col" className="px-3 py-3.5 text-left text-sm font-ltc-m text-black">
-                  BU Head
-                </th>
-                <th scope="col" className="px-3 py-3.5 text-left text-sm font-ltc-m text-black">
                   Department
                 </th>
                 <th scope="col" className="px-3 py-3.5 text-left text-sm font-ltc-m text-black">
-                  Demand Date
+                  Demand&nbsp;Date
                 </th>
                 <th scope="col" className="px-3 py-3.5 text-left text-sm font-ltc-m text-black">
                   Status
@@ -249,7 +243,7 @@ export default function DemandList() {
               {demands.list.map((item) => (
                 <tr key={'DEMANDS_TR_' + item.id}>
                   <td className="w-full max-w-0 py-4 pl-4 pr-3 text-sm text-black font-ltc-m sm:w-auto sm:max-w-none sm:pl-0">
-                    {item.businessUnit.id}
+                    {"HUSKY-"+item.id}
                   </td>
                   <td className="w-full max-w-0 py-4 pl-4 pr-3 text-sm text-black font-ltc-m sm:w-auto sm:max-w-none sm:pl-0">
                     {item.businessUnit.name}
@@ -270,13 +264,7 @@ export default function DemandList() {
                     {item.secondarySkill.name}
                   </td>
                   <td className="px-3 py-4 text-sm text-black font-ltc-r lg:table-cell">
-                    {item.tertiarySkill.name}
-                  </td>
-                  <td className="px-3 py-4 text-sm text-black font-ltc-r lg:table-cell">
                     {item.grade}
-                  </td>
-                  <td className="px-3 py-4 text-sm text-black font-ltc-r lg:table-cell">
-                    {item.buHeadName}
                   </td>
                   <td className="px-3 py-4 text-sm text-black font-ltc-r lg:table-cell">
                     {item.department}

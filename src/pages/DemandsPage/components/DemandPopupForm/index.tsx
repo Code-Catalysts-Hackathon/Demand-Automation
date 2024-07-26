@@ -176,7 +176,7 @@ export default function DemandPopupForm({ open, setOpen, demandForm }: IDemandPo
   const loadFeatureTeamsOptions = async (value: string) => {
     try {
       const response = await axiosApiClient.get(
-        axiosApiClient.URLS.api.GET_BUSINESS_UNITS_URL,
+        axiosApiClient.URLS.api.GET_FEATURETEAMS_URL,
         {
           businessUnitId: formState.businessUnit.value || undefined,
           platformId: formState.platform.value || undefined,
@@ -203,7 +203,7 @@ export default function DemandPopupForm({ open, setOpen, demandForm }: IDemandPo
   const loadSkillsOptions = async (value: string) => {
     try {
       const response = await axiosApiClient.get(
-        axiosApiClient.URLS.api.GET_BUSINESS_UNITS_URL,
+        axiosApiClient.URLS.api.GET_SKILLS_URL,
         {
           businessUnitId: formState.businessUnit.value || undefined,
           platformId: formState.platform.value || undefined,

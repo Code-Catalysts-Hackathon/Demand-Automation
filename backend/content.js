@@ -143,7 +143,6 @@ const demands = [
     status: "Pending",
     comments: "",
   }
-
 ];
 
 const businessUnits = [
@@ -169,25 +168,82 @@ const businessUnits = [
   },
 ];
 
+
+const platforms = [{
+  id:1,
+  name:"Homes"
+},{
+  id:2,
+  name:"Transport"
+},{
+  id:3,
+  name:"Cards"
+},{
+  id:4,
+  name:"Loans"
+}]
+
+const labs = [{
+  id:1,
+  name:"Intermediaries"
+},{
+  id:2,
+  name:"Digital Journeys"
+},{
+  id:3,
+  name:"Direct & retension"
+}]
+
+const featureTeams = [{
+  id:1,
+  name:"Avengers"
+},{
+  id:2,
+  name:"Halifax acquitions"
+},{
+  id:3,
+  name:"MSP Simplification"
+}]
+
+
+const skills = [{
+  id:1,
+  name:"Node Js"
+},{
+  id:2,
+  name:"React JS"
+},{
+  id:3,
+  name:"Java"
+},{
+  id:4,
+  name:"Springboot"
+}]
+
+
 const employees = [
   {
-    "employeeId": "5608247",
+    "id": "5608247",
     "name": "Krishna",
     "email": "Krishna@lbg.com",
     "mobile": "9966040003",
     "grade": "F",
-    "JobTitle": "Lead Software Engineer"
+    "jobTitle": "Lead Software Engineer",
+    "businessUnit":"",
+    "platform":"",
+    "lab":"",
+    "featureTeam":""
   },
   {
-    "employeeId": "5608111",
+    "id": "5608111",
     "name": "Gautam",
     "email": "Gautam@lbg.com",
     "mobile": "9966040111",
     "grade": "E",
-    "JobTitle": "Senior Software Engineer"
+    "jobTitle": "Senior Software Engineer"
   },
   {
-    "employeeId": "5608112",
+    "id": "5608112",
     "name": "David",
     "email": "David@lbg.com",
     "mobile": "9966040112",
@@ -195,7 +251,7 @@ const employees = [
     "jobTitle": "Senior Software Engineer"
   },
   {
-    "employeeId": "5608113",
+    "id": "5608113",
     "name": "Jenny",
     "email": "Jenny@lbg.com",
     "mobile": "9966040113",
@@ -203,12 +259,12 @@ const employees = [
     "jobTitle": "Software Engineer"
   },
   {
-    "employeeId": "5608114",
+    "id": "5608114",
     "name": "John",
     "email": "John@Lbg.com",
     "mobile": "9966040114",
     "grade": "D",
-    "JobTitle": "Software Engineer"
+    "jobTitle": "Software Engineer"
   },
   {
     "employeeId": "5608115",
@@ -216,58 +272,16 @@ const employees = [
     "email": "Prakash@Lbg.com",
     "mobile": "9966040114",
     "grade": "E",
-    "JobTitle": "Senior Quality Engineer"
+    "jobTitle": "Senior Quality Engineer"
   }
 ]
 
 module.exports = {
   demands,
   businessUnits,
+  platforms,
+  labs,
+  skills,
+  featureTeams,
   employees
 };
-
-
-
-// search for 
-
-// Business unit, 
-// platform, 
-// lab, 
-// Feature team (Multi select),
-// status (need enums) Draft Pending Approved Reject
-
-// Add a Dept column in Demand table
-
-
-// role  admin (whole access), BU HEAD (it's specific access)  BU-PL (it;  BU & PL)
-
-// list api needs to send bu, platform, dept
-
-// Employee
-
-// 1 list view using demand entry
-// 2 add employee using demand entry
-
-
-// USERS Roles
-
-// ADMIN  (whole application access)
-// BUHEAD (had only BU level access to view and approve)
-// BUPLEATFORMHEAD  (Recruiter) (had only BU => Platforms level access to view and approve)
-
-
-// Status
-
-// Draft
-// Pending
-// Approved
-// Rejected
-
- 
-
-
-
-// Optional
-
-// sort functionality in Table
-
