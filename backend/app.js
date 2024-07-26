@@ -2,7 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const jwt = require("jsonwebtoken");
 const bodyParser = require("body-parser");
-const { demands, businessUnits, platforms, labs, featureTeams, skills } = require("./content");
+const { demands, businessUnits, platforms, labs, featureTeams, skills, employees } = require("./content");
 const app = express();
 
 const userObj = {
@@ -104,7 +104,7 @@ app.get("/api/skills", (req, res) => {
 app.get("/api/employee", (req, res) => {
   console.log(req);
   res.json({
-    list: employe,
+    list: employees,
   });
 });
 
