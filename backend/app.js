@@ -44,6 +44,13 @@ app.post("/api/demands", (req, res) => {
   });
 });
 
+app.get("/api/demands/:id", (req, res) => {
+  console.log(req);
+  res.json({
+    ...demands[0]
+  });
+});
+
 app.put("/api/demands/:id", (req, res) => {
   console.log(req);
   res.json({
