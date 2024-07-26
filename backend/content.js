@@ -229,10 +229,10 @@ const employees = [
     "mobile": "9966040003",
     "grade": "F",
     "jobTitle": "Lead Software Engineer",
-    "businessUnit":"",
-    "platform":"",
-    "lab":"",
-    "featureTeam":""
+    "businessUnit":"CL",
+    "platform":"Homes",
+    "lab":"Transport",
+    "featureTeam":"MSP Simplification"
   },
   {
     "id": "5608111",
@@ -240,7 +240,11 @@ const employees = [
     "email": "Gautam@lbg.com",
     "mobile": "9966040111",
     "grade": "E",
-    "jobTitle": "Senior Software Engineer"
+    "jobTitle": "Senior Software Engineer",
+    "businessUnit":"CR",
+    "platform":"Cards",
+    "lab":"Transport",
+    "featureTeam":"MSP Simplification"
   },
   {
     "id": "5608112",
@@ -248,7 +252,11 @@ const employees = [
     "email": "David@lbg.com",
     "mobile": "9966040112",
     "grade": "E",
-    "jobTitle": "Senior Software Engineer"
+    "jobTitle": "Senior Software Engineer",
+    "businessUnit":"CL",
+    "platform":"Enterprize",
+    "lab":"Transport",
+    "featureTeam":"Halifax"
   },
   {
     "id": "5608113",
@@ -256,7 +264,11 @@ const employees = [
     "email": "Jenny@lbg.com",
     "mobile": "9966040113",
     "grade": "D",
-    "jobTitle": "Software Engineer"
+    "jobTitle": "Software Engineer",
+    "businessUnit":"CL",
+    "platform":"Homes",
+    "lab":"Transport",
+    "featureTeam":"MSP Simplification"
   },
   {
     "id": "5608114",
@@ -264,7 +276,11 @@ const employees = [
     "email": "John@Lbg.com",
     "mobile": "9966040114",
     "grade": "D",
-    "jobTitle": "Software Engineer"
+    "jobTitle": "Software Engineer",
+    "businessUnit":"CL",
+    "platform":"Homes",
+    "lab":"Transport",
+    "featureTeam":"MSP Simplification"
   },
   {
     "employeeId": "5608115",
@@ -272,7 +288,11 @@ const employees = [
     "email": "Prakash@Lbg.com",
     "mobile": "9966040114",
     "grade": "E",
-    "jobTitle": "Senior Quality Engineer"
+    "jobTitle": "Senior Quality Engineer",
+    "businessUnit":"CR",
+    "platform":"Cards",
+    "lab":"Transport",
+    "featureTeam":"Halifax Acquisitions"
   }
 ]
 
